@@ -3,6 +3,9 @@ module Error where
 import Data.Either
 import Control.Monad.Fail
 
+{- Credit for this goes to ChatGPT which helped me figure out how to make Error a MonadFail.
+The conversation can be seen here: https://chatgpt.com/share/684b6edb-2b58-8009-ba0a-88f5cf612dc9 -}
+
 data Error a = Error (Either String a)
 
 instance Functor Error where
