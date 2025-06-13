@@ -8,7 +8,7 @@ import Control.Parallel
 type Board = Matrix Int
 
 newBoard :: Board
-newBoard = zero 9 9 
+newBoard = zero 9 9  -- TODO: Figure out how to generate a random board that can still be beaten.
 
 checkForWin :: Board -> Bool
 checkForWin b = let b' = Data.Matrix.toList b in (checkRows b') && (checkColumns b) && (checkBoxes b') where
