@@ -1,7 +1,10 @@
-module Game(display) where
+module Game(display, playGame) where
 
 import Board
 import Data.Matrix
+import Error
+import Control.Monad.State
+import Input
 
 display :: Board -> String
 display x = do
@@ -20,4 +23,15 @@ display x = do
     horizLine :: Int -> String
     horizLine 0 = ""
     horizLine x = "-" ++ (horizLine (x-1))
+
+
+playGame :: Error (Int, Int, Int) -> Board -> (String, Board)
+playGame input b = do
+    if (isError input) 
+    then
+        let (Error (Left str)) = input in ("Error: " ++ str ++ "\n\n" , b)
+    else
+        let (Error (Right v)) = input in 
+            let b' = setValue b v in 
+                if (checkForWin b') then ("You Win!\n\n", b') else (display b', b')
 

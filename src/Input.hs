@@ -1,8 +1,10 @@
-module Input(Inp(..), getInput) where
+module Input(Inp(..), getInput, setValue) where
 
 import Data.List.Split
 import Text.Read
 import Data.Maybe
+import Board
+import Data.Matrix
 
 type Inp = (Int, Int, Int)
 
@@ -30,3 +32,6 @@ getInput str = do
                 fail ("Expected Integer. Got: " ++ str)
             else
                 let (Just i) = maybeInt in return i
+
+setValue :: Board -> (Int, Int, Int) -> Board
+setValue b (row, col, val) = setElem val (row, col) b

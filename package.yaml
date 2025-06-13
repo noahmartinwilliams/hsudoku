@@ -44,6 +44,8 @@ executables:
     dependencies:
     - matrix
     - split
+    - parallel
+    - mtl
 
 tests:
   sudoku-test:
