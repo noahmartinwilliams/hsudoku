@@ -29,12 +29,13 @@ checkForWin b = let b' = Data.Matrix.toList b in (checkRows b') && (checkColumns
     checkBoxes :: [Int] -> Bool
     checkBoxes ls = do
         let chunks = chunksOf 3 ls
-            boxes = getBoxes [0..24] chunks
+            boxes = getBoxes [0,1,2,9,10,11,18,19,20] chunks
         checkAllRows boxes
 
     checkAllRows :: [[Int]] -> Bool
     checkAllRows [] = True
-    checkAllRows (ls : rest) = let restChecked = checkAllRows rest in par restChecked ((checkRows ls) && restChecked)
+    checkAllRows (ls : rest) = let restChecked = checkAllRows rest in 
+        par restChecked ((checkRows ls) && restChecked)
 
     getBoxes:: [Int] -> [[Int]] -> [[Int]]
     getBoxes [] _  = []
