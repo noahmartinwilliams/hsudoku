@@ -9,7 +9,7 @@ The conversation can be seen here: https://chatgpt.com/share/684b6edb-2b58-8009-
 data Error a = Error (Either String a)
 
 instance Functor Error where
-    fmap f (Error (Left str)) = Error (Left str)
+    fmap _ (Error (Left str)) = Error (Left str)
     fmap f (Error (Right a)) = Error (Right (f a))
 
 instance Applicative Error where
