@@ -11,9 +11,9 @@ display = do
     gs <- get
     if (checkForWin gs) 
     then
-        state (\_ -> ("You win!!\n\n", gs))
+        return "You win!!\n\n"
     else
-        state (\_ -> ((horizLine (5 * 9 + 1) ) ++ "\n" ++ (intern (Data.Matrix.toList gs) ) , gs)) where
+        return ((horizLine (5 * 9 + 1)) ++ "\n" ++ (intern (Data.Matrix.toList gs))) where
 
     intern :: [Int] -> String
     intern [] = ""
@@ -35,7 +35,7 @@ playGame :: Error (Int, Int, Int) -> State Board String
 playGame input = do
     if (isError input) 
     then
-        let (Error (Left str)) = input in state (\b -> ("Error: " ++ str ++ "\n\n" , b))
+        let (Error (Left str)) = input in return ("Error: " ++ str ++ "\n\n" ) 
     else
         let (Error (Right v)) = input in 
             (setValue v) >> display
